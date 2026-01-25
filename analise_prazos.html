@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Prazos | Obras RJ</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hero-mini { 
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('fundo_rio1.png');
+            height: 300px; background-size: cover; background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="hero-mini flex items-center justify-center text-center text-white">
+        <div>
+            <h1 class="text-4xl font-bold">Análise de Prazos</h1>
+            <p class="mt-2">Métricas de cumprimento de cronograma e entregas</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <div class="bg-white p-8 rounded-xl shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-blue-800 border-b pb-2">Metodologia de Tempo</h2>
+            <p class="text-gray-700 leading-relaxed">
+                Nesta seção, analisamos a discrepância entre o **prazo licitado** e a **data real de conclusão**. 
+                Utilizando processamento em C++, filtramos as obras por região do Rio de Janeiro para identificar onde os gargalos logísticos são mais frequentes.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow border-l-8 border-yellow-500">
+                <h3 class="font-bold text-lg mb-2">Média de Atraso</h3>
+                <p class="text-3xl font-bold text-gray-800">45% <span class="text-sm font-normal text-gray-500">além do previsto</span></p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow border-l-8 border-green-500">
+                <h3 class="font-bold text-lg mb-2">Obras Concluídas no Prazo</h3>
+                <p class="text-3xl font-bold text-gray-800">12% <span class="text-sm font-normal text-gray-500">do total analisado</span></p>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <a href="index.html" class="bg-blue-600 text-white px-8 py-3 rounded-full font-bold hover:bg-blue-700 transition">Voltar ao Início</a>
+        </div>
+    </main>
+</body>
+</html>
