@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <style>
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -48,6 +49,11 @@
         /* Zoom na Equipe */
         .team-img { transition: transform 0.5s ease; width: 100%; height: 100%; object-fit: cover; }
         .team-box:hover .team-img { transform: scale(1.1); }
+
+        /* Estilo Customizado para o Janela de Chat */
+        #chat-window {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -205,9 +211,45 @@
         </div>
     </footer>
 
+    <div id="ai-chat-container" class="fixed bottom-6 right-6 z-[9999]">
+        <button onclick="toggleChat()" class="bg-blue-700 hover:bg-blue-800 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all transform hover:scale-110">
+            <i class="fas fa-robot text-2xl"></i>
+        </button>
+
+        <div id="chat-window" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden animate__animated">
+            <div class="bg-blue-700 p-4 text-white flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="font-bold">Assistente BT DATA</span>
+                </div>
+                <button onclick="toggleChat()" class="text-white opacity-70 hover:opacity-100">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="h-96 bg-gray-50 p-4 overflow-y-auto text-sm" id="chat-content">
+                <div class="bg-white p-3 rounded-lg shadow-sm border border-gray-100 mb-4 text-gray-700">
+                    Olá! Sou o assistente de IA da BT DATA. Posso ajudar com dúvidas sobre o projeto e as obras do RJ. Como posso te ajudar hoje?
+                </div>
+                <p class="text-xs text-center text-gray-400 mt-20 italic">Para ativar a IA real, conecte um serviço como Chatbase ou Botpress neste espaço.</p>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Função para abrir/fechar o chat
+        function toggleChat() {
+            const windowChat = document.getElementById('chat-window');
+            if (windowChat.classList.contains('hidden')) {
+                windowChat.classList.remove('hidden');
+                windowChat.classList.add('animate__fadeInUp');
+            } else {
+                windowChat.classList.add('hidden');
+                windowChat.classList.remove('animate__fadeInUp');
+            }
+        }
+
         AOS.init({ duration: 1000, once: true });
         new Swiper(".mySwiper", {
             loop: true,
