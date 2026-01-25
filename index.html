@@ -10,11 +10,11 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
     <style>
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
-        /* Navbar e Menu Hover */
         .nav-link-container { position: relative; padding: 10px; }
         .dropdown-content {
             display: none; position: absolute; right: 0; top: 100%;
@@ -26,7 +26,6 @@
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Carrossel com Descrição Fluida */
         .swiper { width: 100%; height: 80vh; }
         .swiper-slide { position: relative; overflow: hidden; }
         .hover-description {
@@ -37,7 +36,6 @@
         }
         .swiper-slide:hover .hover-description { opacity: 1; transform: translateY(0); }
 
-        /* Seções de Conteúdo */
         .section-highlight { min-height: 70vh; display: flex; align-items: center; padding: 5rem 0; }
         .chart-frame { 
             background: white; border-radius: 24px; overflow: hidden; 
@@ -46,13 +44,19 @@
         }
         .chart-frame:hover { transform: translateY(-5px); }
 
-        /* Zoom na Equipe */
         .team-img { transition: transform 0.5s ease; width: 100%; height: 100%; object-fit: cover; }
         .team-box:hover .team-img { transform: scale(1.1); }
 
-        /* Estilo Customizado para o Janela de Chat */
-        #chat-window {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        #chat-window { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+        /* Estilo do Mapa */
+        #mapa-rj { 
+            height: 500px; 
+            width: 100%; 
+            border-radius: 20px; 
+            z-index: 10;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -72,6 +76,7 @@
             </div>
             <div class="dropdown-content overflow-hidden">
                 <a href="index.html" class="block px-6 py-4 hover:bg-blue-50 border-b">Início</a>
+                <a href="#mapa-section" class="block px-6 py-4 hover:bg-blue-50 border-b">Mapa de Obras</a>
                 <a href="analise_custos.html" class="block px-6 py-4 hover:bg-blue-50 border-b">Análise de Custos</a>
                 <a href="analise_prazos.html" class="block px-6 py-4 hover:bg-blue-50 border-b">Análise de Prazos</a>
                 <a href="#contato" class="block px-6 py-4 hover:bg-blue-50">Contato</a>
@@ -90,7 +95,7 @@
                 <div class="hover-description text-center">
                     <h2 class="text-4xl font-bold mb-6">A Importância da Análise</h2>
                     <p class="max-w-2xl text-lg leading-relaxed font-light">
-                        A transparência em obras públicas é o pilar fundamental para o desenvolvimento do Rio de Janeiro. Nossa análise técnica transforma dados brutos em decisões inteligentes, garantindo que cada investimento retorne em benefício real para a população.
+                        A transparência em obras públicas é o pilar fundamental para o desenvolvimento do Rio de Janeiro. Nossa análise técnica transforma dados brutos em decisões inteligentes.
                     </p>
                 </div>
             </div>
@@ -102,13 +107,39 @@
                 <div class="hover-description text-center">
                     <h2 class="text-4xl font-bold mb-6">Metodologia BT DATA</h2>
                     <p class="max-w-2xl text-lg leading-relaxed font-light">
-                        Utilizamos algoritmos otimizados para monitorar aditivos e cronogramas. Através do processamento de dados massivos, eliminamos a opacidade e entregamos clareza técnica sobre o progresso das obras fluminenses.
+                        Utilizamos algoritmos otimizados para monitorar aditivos e cronogramas, entregando clareza técnica sobre o progresso das obras fluminenses.
                     </p>
                 </div>
             </div>
         </div>
         <div class="swiper-pagination"></div>
     </div>
+
+    <section id="mapa-section" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl font-black text-gray-900">Geolocalização de Obras</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto italic">
+                    Visualize espacialmente a distribuição dos projetos de infraestrutura pelo estado. Passe o mouse sobre os marcadores para detalhes imediatos.
+                </p>
+            </div>
+            <div id="mapa-rj" data-aos="zoom-in"></div>
+            <div class="mt-8 grid md:grid-cols-3 gap-6 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-blue-700">Mapeamento Georreferenciado</h4>
+                    <p class="text-sm text-gray-500 mt-2">Dados plotados via coordenadas reais para auditoria local.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-blue-700">Identificação de Gargalos</h4>
+                    <p class="text-sm text-gray-500 mt-2">Análise de concentração de obras paradas por região administrativa.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-blue-700">Interatividade Técnica</h4>
+                    <p class="text-sm text-gray-500 mt-2">Ferramenta iterativa para consulta rápida de status e orçamentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="section-highlight">
         <div class="container mx-auto px-6">
@@ -117,19 +148,12 @@
                     <div class="w-16 h-1 bg-blue-600 mb-6"></div>
                     <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">Auditoria de Custos & Finanças</h2>
                     <p class="text-lg text-gray-600 leading-relaxed mb-8">
-                        Nosso sistema identifica variações orçamentárias e aditivos contratuais de forma automatizada. Através da nossa análise, é possível visualizar o desvio entre o orçamento licitado e o valor final executado, garantindo o controle rigoroso dos gastos públicos.
+                        Nosso sistema identifica variações orçamentárias e aditivos contratuais de forma automatizada.
                     </p>
-                    <div class="flex items-center gap-4 text-blue-700 font-bold">
-                        <i class="fas fa-chart-pie text-2xl"></i>
-                        <span>Análise de aditivos em tempo real</span>
-                    </div>
                     <a href="analise_custos.html" class="mt-10 inline-block bg-blue-700 text-white px-10 py-4 rounded-xl font-bold hover:bg-blue-800 transition shadow-lg">Explorar Gráficos de Custos</a>
                 </div>
                 <div class="chart-frame p-4" data-aos="fade-left">
                     <img src="grafico_custos.jpeg" alt="Gráfico de Custos" class="w-full h-auto rounded-lg">
-                    <div class="p-4 bg-gray-50 mt-4 rounded-lg">
-                        <p class="text-sm text-gray-500 italic text-center">Visualização do impacto financeiro e distribuição de recursos por setor.</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -140,20 +164,13 @@
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="chart-frame p-4 order-2 md:order-1" data-aos="fade-right">
                     <img src="grafico_prazos.jpeg" alt="Gráfico de Prazos" class="w-full h-auto rounded-lg">
-                    <div class="p-4 bg-gray-50 mt-4 rounded-lg">
-                        <p class="text-sm text-gray-500 italic text-center">Comparativo estatístico entre prazos previstos e datas de conclusão.</p>
-                    </div>
                 </div>
                 <div class="order-1 md:order-2" data-aos="fade-left">
                     <div class="w-16 h-1 bg-green-500 mb-6"></div>
                     <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">Monitoramento de Prazos</h2>
                     <p class="text-lg text-gray-600 leading-relaxed mb-8">
-                        Atrasos em obras públicas geram custos sociais imensuráveis. Mapeamos o cronograma de cada projeto, identificando gargalos logísticos e administrativos que impedem a entrega pontual da infraestrutura no Estado do Rio de Janeiro.
+                        Atrasos em obras públicas geram custos sociais imensuráveis. Mapeamos o cronograma de cada projeto.
                     </p>
-                    <div class="flex items-center gap-4 text-green-600 font-bold">
-                        <i class="fas fa-history text-2xl"></i>
-                        <span>Rastreamento de entregas atrasadas</span>
-                    </div>
                     <a href="analise_prazos.html" class="mt-10 inline-block bg-green-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-green-700 transition shadow-lg">Ver Painel de Prazos</a>
                 </div>
             </div>
@@ -186,28 +203,20 @@
         <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12">
             <div class="text-center md:text-left">
                 <h3 class="text-2xl font-bold mb-6 text-blue-500">BT DATA OBRAS RJ</h3>
-                <p class="text-gray-400">Desenvolvido por alunos do Instituto Militar de Engenharia (IME) para a fiscalização técnica de infraestrutura.</p>
             </div>
             <div class="text-center">
                 <h3 class="text-xl font-bold mb-6">Acesso Rápido</h3>
                 <div class="flex flex-col gap-4 text-gray-400">
                     <a href="analise_custos.html" class="hover:text-white transition">Dashboard Financeiro</a>
                     <a href="analise_prazos.html" class="hover:text-white transition">Gestão de Cronogramas</a>
-                    <a href="#" class="hover:text-white transition">Documentação Técnica</a>
                 </div>
             </div>
             <div class="text-center md:text-right">
-                <h3 class="text-xl font-bold mb-6">Contato Profissional</h3>
                 <div class="flex justify-center md:justify-end gap-8 text-3xl">
                     <a href="mailto:contato@btdata.com" class="hover:text-blue-500 transition"><i class="fas fa-envelope"></i></a>
                     <a href="https://linkedin.com" class="hover:text-blue-500 transition"><i class="fab fa-linkedin"></i></a>
-                    <a href="tel:+5521999999999" class="hover:text-blue-500 transition"><i class="fas fa-phone"></i></a>
                 </div>
-                <p class="text-gray-500 mt-6 text-sm italic">Rio de Janeiro, Brasil</p>
             </div>
-        </div>
-        <div class="text-center text-gray-700 mt-16 pt-8 border-t border-gray-800 text-xs uppercase tracking-widest">
-            © 2026 - Leonardo & Thiago (IME)
         </div>
     </footer>
 
@@ -215,47 +224,44 @@
         <button onclick="toggleChat()" class="bg-blue-700 hover:bg-blue-800 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all transform hover:scale-110">
             <i class="fas fa-robot text-2xl"></i>
         </button>
-
         <div id="chat-window" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden animate__animated">
             <div class="bg-blue-700 p-4 text-white flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span class="font-bold">Assistente BT DATA</span>
-                </div>
-                <button onclick="toggleChat()" class="text-white opacity-70 hover:opacity-100">
-                    <i class="fas fa-times"></i>
-                </button>
+                <span class="font-bold">Assistente BT DATA</span>
+                <button onclick="toggleChat()" class="text-white opacity-70 hover:opacity-100"><i class="fas fa-times"></i></button>
             </div>
             <div class="h-96 bg-gray-50 p-4 overflow-y-auto text-sm" id="chat-content">
-                <div class="bg-white p-3 rounded-lg shadow-sm border border-gray-100 mb-4 text-gray-700">
-                    Olá! Sou o assistente de IA da BT DATA. Posso ajudar com dúvidas sobre o projeto e as obras do RJ. Como posso te ajudar hoje?
-                </div>
-                <p class="text-xs text-center text-gray-400 mt-20 italic">Para ativar a IA real, conecte um serviço como Chatbase ou Botpress neste espaço.</p>
+                <div class="bg-white p-3 rounded-lg shadow-sm mb-4 text-gray-700">Olá! Sou a IA da BT DATA. Como posso ajudar com os dados de obras?</div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     <script>
-        // Função para abrir/fechar o chat
+        // Inicialização do Mapa
+        var map = L.map('mapa-rj').setView([-22.9068, -43.1729], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Exemplos de Marcadores
+        var m1 = L.marker([-22.9519, -43.2105]).addTo(map);
+        m1.bindTooltip("<b>Obra: Reforma Túnel Rebouças</b><br>Status: Em execução");
+
+        var m2 = L.marker([-22.8155, -43.2435]).addTo(map);
+        m2.bindTooltip("<b>Obra: Expansão BRT</b><br>Eficiência: 92%");
+
+        // Funções de UI
         function toggleChat() {
             const windowChat = document.getElementById('chat-window');
-            if (windowChat.classList.contains('hidden')) {
-                windowChat.classList.remove('hidden');
-                windowChat.classList.add('animate__fadeInUp');
-            } else {
-                windowChat.classList.add('hidden');
-                windowChat.classList.remove('animate__fadeInUp');
-            }
+            windowChat.classList.toggle('hidden');
+            if(!windowChat.classList.contains('hidden')) windowChat.classList.add('animate__fadeInUp');
         }
 
         AOS.init({ duration: 1000, once: true });
-        new Swiper(".mySwiper", {
-            loop: true,
-            autoplay: { delay: 5000 },
-            pagination: { el: ".swiper-pagination", clickable: true },
-        });
+        new Swiper(".mySwiper", { loop: true, autoplay: { delay: 5000 }, pagination: { el: ".swiper-pagination", clickable: true } });
     </script>
 </body>
 </html>
