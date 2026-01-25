@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Nome - Engenharia, Programação & Dados</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .btn-primary {
+            @apply bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300;
+        }
+        .card {
+            @apply bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300;
+        }
+        .header-bg {
+            background-image: linear-gradient(to right top, #d1d5db, #e2e8f0, #f1f5f9, #f8fafc, #ffffff);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="header-bg py-16 text-center">
+        <div class="container mx-auto px-4">
+            <img src="https://via.placeholder.com/150" alt="Sua Foto de Perfil" class="rounded-full w-36 h-36 mx-auto mb-6 border-4 border-white shadow-lg">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Olá, eu sou [Seu Nome Completo]</h1>
+            <p class="text-xl text-gray-600 mb-8">Estudante de Engenharia | Entusiasta de Maratonas de Programação & Hackathons</p>
+            <a href="#projetos" class="btn-primary">Ver Meus Projetos</a>
+        </div>
+    </header>
+
+    <section id="sobre" class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Sobre Mim</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
+                Sou um estudante de Engenharia com uma paixão por resolver problemas complexos através da programação. Minha jornada é marcada pela participação ativa em maratonas de programação e hackathons, onde busco aplicar meus conhecimentos em algoritmos, estruturas de dados e desenvolvimento de software para criar soluções inovadoras.
+            </p>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+                No meu tempo livre, dedico-me a aprender novas tecnologias e a aprimorar minhas habilidades em C++ e análise de dados, sempre com um olhar atento para a eficiência e otimização.
+            </p>
+        </div>
+    </section>
+
+    <section id="projetos" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Meus Projetos</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Análise de Eficiência de Obras Públicas (RJ)</h3>
+                    <p class="text-gray-700 mb-4">
+                        Um projeto desenvolvido em C++ para analisar a eficiência e os custos de obras públicas no estado do Rio de Janeiro. Inclui funcionalidades para:
+                    </p>
+                    <ul class="list-disc list-inside text-gray-600 mb-4">
+                        <li>Visualização de obras concluídas no último ano</li>
+                        <li>Cálculo do montante total de custos</li>
+                        <li>Análise de dados para identificar gargalos e otimização.</li>
+                    </ul>
+                    <a href="https://github.com/SEU-USUARIO/nome-do-seu-repositorio-obras" target="_blank" class="text-blue-600 hover:underline font-medium">Ver no GitHub &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Algoritmos para Maratonas</h3>
+                    <p class="text-gray-700 mb-4">
+                        Coleção de implementações em C++ de algoritmos e estruturas de dados essenciais para competições de programação (DP, Grafos, Busca, etc.).
+                    </p>
+                    <a href="https://github.com/SEU-USUARIO/nome-do-seu-repositorio-algoritmos" target="_blank" class="text-blue-600 hover:underline font-medium">Ver no GitHub &rarr;</a>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Desenvolvimento Web com React</h3>
+                    <p class="text-gray-700 mb-4">
+                        Um projeto de web app utilizando React e Node.js para gerenciamento de tarefas, explorando conceitos de CRUD e APIs RESTful.
+                    </p>
+                    <a href="https://github.com/SEU-USUARIO/nome-do-seu-repositorio-react" target="_blank" class="text-blue-600 hover:underline font-medium">Ver no GitHub &rarr;</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="habilidades" class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8">Minhas Habilidades</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">C++</span>
+                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">Estruturas de Dados</span>
+                <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold">Algoritmos</span>
+                <span class="bg-yellow-10
