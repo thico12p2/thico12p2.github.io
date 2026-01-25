@@ -6,77 +6,65 @@
     <title>Análise de Obras Públicas RJ</title>
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
         
-        /* Carrossel Setup */
-        .swiper { width: 100%; height: 65vh; }
+        /* Ajuste do Carrossel */
+        .swiper { width: 100%; height: 60vh; }
         .swiper-slide {
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
         }
-        .swiper-slide::after {
-            content: "";
+        .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
         }
-        .hero-content { z-index: 10; text-align: center; color: white; }
 
-        /* Menu de 3 Barras (Hambúrguer) Customizado */
-        .menu-btn {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 10px;
-            transition: 0.3s;
+        /* Zoom na Foto ao passar o mouse */
+        .img-zoom {
+            transition: transform 0.5s ease;
         }
-        .menu-btn div {
-            width: 30px;
+        .img-zoom:hover {
+            transform: scale(1.1);
+        }
+
+        /* Menu de 3 barras (Hambúrguer) */
+        .menu-bar {
+            width: 25px;
             height: 3px;
-            background-color: #1f2937;
+            background-color: #333;
+            margin: 4px 0;
             transition: 0.4s;
-            border-radius: 2px;
         }
         
-        /* Hover nas 3 barras: efeito visual de seleção */
-        .menu-btn:hover div:nth-child(1) { width: 20px; background-color: #2563eb; }
-        .menu-btn:hover div:nth-child(2) { width: 30px; background-color: #2563eb; }
-        .menu-btn:hover div:nth-child(3) { width: 15px; background-color: #2563eb; }
-
-        /* Zoom na Foto de Perfil */
-        .profile-img {
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Dropdown customizado */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s;
         }
-        .profile-img:hover {
-            transform: scale(1.15);
-            border-color: #2563eb;
-        }
-
-        /* Dropdown do Menu */
-        .nav-links {
+        
+        .dropdown-content {
             display: none;
             position: absolute;
-            top: 70px;
-            right: 20px;
-            background: white;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            z-index: 100;
             border-radius: 8px;
-            flex-direction: column;
-            width: 200px;
-            overflow: hidden;
         }
-        .menu-container:hover .nav-links { display: flex; animation: slideDown 0.3s ease-out; }
-        
-        @keyframes slideDown {
+
+        @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
@@ -84,85 +72,60 @@
 </head>
 <body class="bg-gray-50">
 
-    <nav class="bg-white fixed w-full z-50 shadow-md px-6 py-4 flex justify-between items-center">
+    <nav class="bg-white fixed w-full z-50 shadow-sm px-6 py-4 flex justify-between items-center">
         <div class="text-xl font-bold border-l-4 border-blue-600 pl-2">PROJETO OBRAS RJ</div>
         
-        <div class="relative menu-container">
-            <div class="menu-btn">
-                <div></div>
-                <div></div>
-                <div></div>
+        <div class="relative dropdown">
+            <div class="cursor-pointer p-2">
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
+                <div class="menu-bar"></div>
             </div>
-            
-            <div class="nav-links">
-                <a href="index.html" class="px-6 py-3 hover:bg-blue-50 hover:text-blue-600 border-b">Início</a>
-                <a href="analise_custos.html" class="px-6 py-3 hover:bg-blue-50 hover:text-blue-600 border-b">Custos</a>
-                <a href="analise_prazos.html" class="px-6 py-3 hover:bg-blue-50 hover:text-blue-600 border-b">Prazos</a>
-                <a href="#desenvolvedores" class="px-6 py-3 hover:bg-blue-50 hover:text-blue-600">Equipe</a>
+            <div class="dropdown-content mt-2">
+                <a href="index.html" class="block px-4 py-3 hover:bg-gray-100">Início</a>
+                <a href="analise_custos.html" class="block px-4 py-3 hover:bg-gray-100">Custos</a>
+                <a href="analise_prazos.html" class="block px-4 py-3 hover:bg-gray-100">Prazos</a>
+                <a href="#desenvolvedores" class="block px-4 py-3 hover:bg-gray-100">Equipe</a>
             </div>
         </div>
     </nav>
 
-    <div class="swiper mySwiper">
+    <div class="swiper mySwiper pt-16">
         <div class="swiper-wrapper">
             <div class="swiper-slide" style="background-image: url('fundo_rio1.png');">
-                <div class="hero-content">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4" data-aos="fade-up">Eficiência em Obras Públicas</h1>
-                    <p class="text-xl opacity-90">Análise técnica detalhada do estado do RJ</p>
+                <div class="overlay"></div>
+                <div class="relative text-center text-white z-10">
+                    <h1 class="text-4xl md:text-6xl font-bold" data-aos="fade-up">Eficiência em Obras</h1>
                 </div>
             </div>
             <div class="swiper-slide" style="background-image: url('fundo_rio2.png');">
-                <div class="hero-content">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Dados Transparentes</h1>
-                    <p class="text-xl opacity-90">Transformando números em gestão pública</p>
+                <div class="overlay"></div>
+                <div class="relative text-center text-white z-10">
+                    <h1 class="text-4xl md:text-6xl font-bold">Transparência RJ</h1>
                 </div>
             </div>
         </div>
         <div class="swiper-pagination"></div>
     </div>
 
-    <section class="py-16 container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800" data-aos="fade-down">Áreas de Análise</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            
-            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-blue-500 text-center" data-aos="zoom-in" data-aos-delay="100">
-                <h3 class="text-xl font-bold mb-4">Análise de Custos</h3>
-                <p class="text-gray-600 mb-6">Estudo sobre orçamentos e desvios financeiros.</p>
-                <a href="analise_custos.html" target="_blank" class="text-blue-600 font-bold hover:underline">Abrir Análise →</a>
-            </div>
-
-            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-green-500 text-center" data-aos="zoom-in" data-aos-delay="200">
-                <h3 class="text-xl font-bold mb-4">Prazos & Conclusão</h3>
-                <p class="text-gray-600 mb-6">Dados reais sobre o tempo de entrega das obras.</p>
-                <a href="analise_prazos.html" target="_blank" class="text-green-600 font-bold hover:underline">Abrir Análise →</a>
-            </div>
-
-            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-purple-500 text-center" data-aos="zoom-in" data-aos-delay="300">
-                <h3 class="text-xl font-bold mb-4">Insights Técnicos</h3>
-                <p class="text-gray-600 mb-6">Conclusões baseadas em processamento em C++.</p>
-                <a href="analise_prazos.html" target="_blank" class="text-purple-600 font-bold hover:underline">Abrir Análise →</a>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="desenvolvedores" class="py-20 bg-gray-100">
+    <section id="desenvolvedores" class="py-20 bg-white">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-12 text-gray-800">Equipe Técnica</h2>
+            <h2 class="text-3xl font-bold mb-12">Desenvolvedores</h2>
             <div class="flex flex-wrap justify-center gap-12">
-                
-                <div class="max-w-xs" data-aos="fade-right">
-                    <img src="foto_thiago.png" class="profile-img w-40 h-40 rounded-full mx-auto mb-4 border-4 border-white shadow-xl object-cover">
+                <div class="max-w-xs" data-aos="zoom-in">
+                    <div class="overflow-hidden rounded-full w-40 h-40 mx-auto mb-4 border-4 border-blue-100 shadow-lg">
+                        <img src="foto_thiago.png" class="img-zoom w-full h-full object-cover">
+                    </div>
                     <h4 class="font-bold text-lg">Thiago Dias</h4>
-                    <p class="text-gray-500 font-medium">Estudante de Engenharia</p>
+                    <p class="text-gray-500">Engenharia</p>
                 </div>
-
-                <div class="max-w-xs" data-aos="fade-left">
-                    <img src="foto_leonardo.png" class="profile-img w-40 h-40 rounded-full mx-auto mb-4 border-4 border-white shadow-xl object-cover">
+                <div class="max-w-xs" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="overflow-hidden rounded-full w-40 h-40 mx-auto mb-4 border-4 border-blue-100 shadow-lg">
+                        <img src="foto_leonardo.png" class="img-zoom w-full h-full object-cover">
+                    </div>
                     <h4 class="font-bold text-lg">Leonardo</h4>
-                    <p class="text-gray-500 font-medium">Estudante de Engenharia</p>
+                    <p class="text-gray-500">Engenharia</p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -170,14 +133,14 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inicializar Animações de Scroll
-        AOS.init({ duration: 1000, once: true });
+        // Inicializa as animações
+        AOS.init({ once: true });
 
-        // Inicializar Carrossel
-        var swiper = new Swiper(".mySwiper", {
+        // Inicializa o carrossel
+        const swiper = new Swiper('.mySwiper', {
             loop: true,
-            autoplay: { delay: 4000 },
-            pagination: { el: ".swiper-pagination", clickable: true },
+            autoplay: { delay: 3000 },
+            pagination: { el: '.swiper-pagination', clickable: true },
         });
     </script>
 </body>
