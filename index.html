@@ -3,162 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise de Obras Públicas RJ | IME</title>
+    <title>BT DATA Obras RJ | IME</title>
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
-        /* Carrossel Dinâmico */
-        .swiper { width: 100%; height: 70vh; }
-        .swiper-slide {
-            background-size: cover; background-position: center;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .overlay { background: rgba(0, 0, 0, 0.6); position: absolute; inset: 0; }
-
-        /* Menu de 3 Barras via Hover */
-        .nav-container { position: relative; padding: 10px 0; }
-        .menu-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-        .bar { width: 28px; height: 3px; background-color: #1f2937; transition: 0.3s; border-radius: 2px; }
-        
-        .dropdown-menu {
+        /* Navbar e Menu Hover */
+        .nav-link-container { position: relative; padding: 10px; }
+        .dropdown-content {
             display: none; position: absolute; right: 0; top: 100%;
-            background: white; min-width: 220px; border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15); border: 1px solid #f3f4f6;
-            overflow: hidden; z-index: 100;
+            background: white; min-width: 240px; border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 1000;
+            border: 1px solid #eee;
         }
+        /* O segredo para o menu não sumir: uma área de ponte */
+        .nav-link-container:hover .dropdown-content { display: block; animation: fadeInUp 0.3s ease; }
         
-        /* O "pulo do gato": manter o menu aberto ao mover o mouse para baixo */
-        .nav-container:hover .dropdown-menu { display: block; animation: slideIn 0.3s ease-out; }
-        .nav-container:hover .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-        .nav-container:hover .bar:nth-child(2) { opacity: 0; }
-        .nav-container:hover .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Carrossel com Descrição Fluida no Hover */
+        .swiper { width: 100%; height: 85vh; }
+        .swiper-slide { position: relative; overflow: hidden; }
+        .hover-description {
+            position: absolute; inset: 0; background: rgba(37, 99, 235, 0.85);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; padding: 2rem; opacity: 0; transition: all 0.6s ease;
+            transform: translateY(100%);
+        }
+        .swiper-slide:hover .hover-description { opacity: 1; transform: translateY(0); }
 
-        /* Zoom na Imagem da Equipe */
-        .profile-container { overflow: hidden; border-radius: 9999px; width: 160px; height: 160px; }
-        .profile-img { transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); width: 100%; height: 100%; object-cover: cover; }
-        .profile-container:hover .profile-img { transform: scale(1.2); }
+        /* Estilização das Seções Grandes */
+        .section-size { min-height: 80vh; display: flex; align-items: center; }
+        .img-placeholder { background: #e5e7eb; border-radius: 20px; min-height: 400px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #9ca3af; }
 
-        /* Card de Segmentos */
-        .segment-card { transition: all 0.3s ease; border-top: 5px solid #2563eb; }
-        .segment-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        /* Zoom na Equipe */
+        .team-img { transition: transform 0.5s ease; width: 100%; height: 100%; object-fit: cover; }
+        .team-box:hover .team-img { transform: scale(1.1); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-white">
 
-    <nav class="bg-white/90 backdrop-blur-md fixed w-full z-50 shadow-sm px-8 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <div class="h-8 w-1 bg-blue-600"></div>
-            <span class="text-xl font-extrabold tracking-tight">DATA OBRAS RJ</span>
+    <nav class="bg-white/95 backdrop-blur-sm fixed w-full z-50 shadow-sm px-8 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-2 h-8 bg-blue-700"></div>
+            <span class="text-2xl font-black text-blue-900 tracking-tighter">BT DATA OBRAS RJ</span>
         </div>
         
-        <div class="nav-container">
-            <div class="menu-btn">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+        <div class="nav-link-container">
+            <div class="cursor-pointer space-y-1.5 p-2 group">
+                <div class="w-7 h-0.5 bg-gray-800"></div>
+                <div class="w-7 h-0.5 bg-gray-800"></div>
+                <div class="w-7 h-0.5 bg-gray-800"></div>
             </div>
-            <div class="dropdown-menu">
-                <a href="index.html" class="block px-6 py-4 hover:bg-blue-50 hover:text-blue-600 transition font-medium">Início</a>
-                <a href="analise_custos.html" class="block px-6 py-4 hover:bg-blue-50 hover:text-blue-600 transition font-medium">Análise de Custos</a>
-                <a href="analise_prazos.html" class="block px-6 py-4 hover:bg-blue-50 hover:text-blue-600 transition font-medium">Análise de Prazos</a>
-                <a href="#sobre" class="block px-6 py-4 hover:bg-blue-50 hover:text-blue-600 transition font-medium">Sobre o Projeto</a>
+            <div class="dropdown-content overflow-hidden">
+                <a href="index.html" class="block px-6 py-4 hover:bg-blue-50 border-b">Início</a>
+                <a href="analise_custos.html" class="block px-6 py-4 hover:bg-blue-50 border-b">Análise de Custos</a>
+                <a href="analise_prazos.html" class="block px-6 py-4 hover:bg-blue-50 border-b">Análise de Prazos</a>
+                <a href="#contato" class="block px-6 py-4 hover:bg-blue-50">Contato</a>
             </div>
         </div>
     </nav>
 
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-image: url('fundo_rio1.png');">
-                <div class="overlay"></div>
-                <div class="relative text-center text-white px-4" data-aos="fade-up">
-                    <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Engenharia de Dados</h1>
-                    <p class="text-xl md:text-2xl font-light max-w-2xl mx-auto">Transformando a infraestrutura do Rio através de análises técnicas rigorosas.</p>
+            <div class="swiper-slide" style="background: url('fundo_rio1.png') center/cover;">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <div class="relative z-10 text-white text-center">
+                    <h1 class="text-5xl font-black uppercase">Infraestrutura em Foco</h1>
+                    <p class="text-lg opacity-80 mt-2">Passe o mouse para saber mais</p>
+                </div>
+                <div class="hover-description">
+                    <h2 class="text-3xl font-bold mb-4">A Importância da Análise</h2>
+                    <p class="max-w-2xl text-center text-lg leading-relaxed">
+                        Obras públicas representam o investimento do cidadão no futuro do estado. No Rio de Janeiro, a análise técnica é o único caminho para garantir que os recursos de engenharia sejam aplicados com eficiência, combatendo desperdícios e garantindo que projetos saiam do papel para transformar vidas.
+                    </p>
                 </div>
             </div>
-            <div class="swiper-slide" style="background-image: url('fundo_rio2.png');">
-                <div class="overlay"></div>
-                <div class="relative text-center text-white px-4">
-                    <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Análises em tempo real</h1>
-                    <p class="text-xl md:text-2xl font-light">Monitoramento contínuo de cronogramas e orçamentos públicos.</p>
+            <div class="swiper-slide" style="background: url('fundo_rio2.png') center/cover;">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <div class="relative z-10 text-white text-center">
+                    <h1 class="text-5xl font-black uppercase">Análises em Tempo Real</h1>
+                </div>
+                <div class="hover-description">
+                    <h2 class="text-3xl font-bold mb-4">Metodologia BT DATA</h2>
+                    <p class="max-w-2xl text-center text-lg leading-relaxed">
+                        Nossos algoritmos processam milhares de linhas de dados oficiais para extrair a verdade por trás dos cronogramas. A transparência em tempo real permite uma fiscalização ativa e fundamentada em dados concretos de engenharia.
+                    </p>
                 </div>
             </div>
         </div>
         <div class="swiper-pagination"></div>
     </div>
 
-    <section id="sobre" class="py-20 container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-blue-600 font-bold uppercase tracking-widest mb-2" data-aos="fade-up">A Iniciativa</h2>
-            <h3 class="text-4xl font-bold mb-8 text-gray-800" data-aos="fade-up" data-aos-delay="100">Transparência através da Tecnologia</h3>
-            <p class="text-lg text-gray-600 leading-relaxed mb-10" data-aos="fade-up" data-aos-delay="200">
-                Desenvolvido como um protótipo de alta performance, este portal utiliza algoritmos de extração e processamento de dados para auditar a eficiência de obras públicas no estado fluminense. Nosso foco é converter dados complexos em insights visuais que permitem identificar gargalos, prever atrasos e fiscalizar o uso do recurso público.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 mt-12">
-            <div class="segment-card bg-white p-8 rounded-2xl shadow-sm" data-aos="fade-up" data-aos-delay="300">
-                <div class="text-blue-600 text-3xl mb-4">📊</div>
-                <h4 class="text-xl font-bold mb-3">Auditoria de Custos</h4>
-                <p class="text-gray-500 mb-6">Exploração de aditivos contratuais e variações orçamentárias detalhadas.</p>
-                <a href="analise_custos.html" class="text-blue-600 font-semibold hover:gap-2 flex items-center transition-all">Explorar aba <span class="ml-2">→</span></a>
+    <section class="section-size bg-gray-50 py-20">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <span class="text-blue-600 font-bold tracking-widest uppercase">Módulo 01</span>
+                <h2 class="text-5xl font-black text-gray-900 mt-4 mb-6">Auditoria Financeira & Custos</h2>
+                <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                    Nossa análise mergulha profundamente nos aditivos contratuais e variações de orçamentos licitados. Através de ferramentas de Data Science, conseguimos visualizar o impacto de cada reajuste no tesouro estadual, expondo a saúde financeira dos projetos do RJ.
+                </p>
+                <a href="analise_custos.html" class="inline-block bg-blue-700 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-blue-800 transition">Ver Dashboard de Custos</a>
             </div>
-
-            <div class="segment-card bg-white p-8 rounded-2xl shadow-sm" data-aos="fade-up" data-aos-delay="400">
-                <div class="text-green-600 text-3xl mb-4">⏱️</div>
-                <h4 class="text-xl font-bold mb-3">Métricas de Prazo</h4>
-                <p class="text-gray-500 mb-6">Comparativo entre cronogramas previstos e o progresso real das obras.</p>
-                <a href="analise_prazos.html" class="text-green-600 font-semibold hover:gap-2 flex items-center transition-all">Explorar aba <span class="ml-2">→</span></a>
-            </div>
-
-            <div class="segment-card bg-white p-8 rounded-2xl shadow-sm" data-aos="fade-up" data-aos-delay="500">
-                <div class="text-purple-600 text-3xl mb-4">⚙️</div>
-                <h4 class="text-xl font-bold mb-3">Metodologia C++</h4>
-                <p class="text-gray-500 mb-6">Entenda como o processamento de dados massivos sustenta este projeto.</p>
-                <a href="#" class="text-purple-600 font-semibold hover:gap-2 flex items-center transition-all">Ver detalhes <span class="ml-2">→</span></a>
+            <div class="img-placeholder" data-aos="zoom-in" style="background-image: url('grafico_custos.png'); background-size: cover;">
+                <span>[Gráfico de Custos]</span>
             </div>
         </div>
     </section>
 
-    <section class="py-20 bg-gray-900 text-white">
+    <section class="section-size bg-white py-20">
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="img-placeholder order-2 md:order-1" data-aos="zoom-in" style="background-image: url('grafico_prazos.png'); background-size: cover;">
+                <span>[Gráfico de Prazos]</span>
+            </div>
+            <div class="order-1 md:order-2" data-aos="fade-left">
+                <span class="text-green-600 font-bold tracking-widest uppercase">Módulo 02</span>
+                <h2 class="text-5xl font-black text-gray-900 mt-4 mb-6">Gestão de Prazos & Cronogramas</h2>
+                <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                    O tempo é um recurso escasso. Monitoramos o ciclo de vida completo da obra, desde o anúncio até a entrega final. Nossa plataforma identifica atrasos sistêmicos por região, auxiliando na compreensão dos gargalos logísticos do Rio de Janeiro.
+                </p>
+                <a href="analise_prazos.html" class="inline-block bg-green-600 text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-green-700 transition">Analisar Calendário</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-blue-900 text-white">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4">Equipe Técnica</h2>
-            <p class="text-blue-400 font-medium mb-16 tracking-widest uppercase">Corpo de Alunos - Instituto Militar de Engenharia</p>
-            
-            <div class="flex flex-wrap justify-center gap-16">
-                <div class="max-w-xs group" data-aos="zoom-in">
-                    <div class="profile-container mx-auto mb-6 border-4 border-blue-600/30 group-hover:border-blue-500 transition-colors">
-                        <img src="foto_thiago.png" class="profile-img">
+            <h2 class="text-4xl font-bold mb-16">Desenvolvido por Alunos do IME</h2>
+            <div class="flex flex-wrap justify-center gap-20">
+                <div class="max-w-xs team-box" data-aos="fade-up">
+                    <div class="w-48 h-48 rounded-full overflow-hidden mx-auto mb-6 border-4 border-blue-400">
+                        <img src="foto_thiago.png" class="team-img">
                     </div>
                     <h4 class="text-2xl font-bold">Thiago Dias</h4>
-                    <p class="text-gray-400 mt-2">Engenheiro em formação pelo IME, especialista em algoritmos e otimização de processos.</p>
+                    <p class="text-blue-200 uppercase text-sm tracking-widest mt-2">Engenharia Militar</p>
                 </div>
-
-                <div class="max-w-xs group" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="profile-container mx-auto mb-6 border-4 border-blue-600/30 group-hover:border-blue-500 transition-colors">
-                        <img src="foto_leonardo.png" class="profile-img">
+                <div class="max-w-xs team-box" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-48 h-48 rounded-full overflow-hidden mx-auto mb-6 border-4 border-blue-400">
+                        <img src="foto_leonardo.png" class="team-img">
                     </div>
                     <h4 class="text-2xl font-bold">Leonardo</h4>
-                    <p class="text-gray-400 mt-2">Engenheiro em formação pelo IME, focado em análise de dados e gestão de infraestrutura.</p>
+                    <p class="text-blue-200 uppercase text-sm tracking-widest mt-2">Engenharia Militar</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <footer id="contato" class="bg-gray-900 text-white py-20 border-t border-gray-800">
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-blue-500">BT DATA OBRAS RJ</h3>
+                <p class="text-gray-400">Análise técnica e auditoria de engenharia para o desenvolvimento do Rio de Janeiro.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-6">Links Rápidos</h3>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="analise_custos.html" class="hover:text-white transition">Custos Públicos</a></li>
+                    <li><a href="analise_prazos.html" class="hover:text-white transition">Prazos de Entrega</a></li>
+                    <li><a href="#" class="hover:text-white transition">Metodologia C++</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-6">Fale Conosco</h3>
+                <div class="flex justify-center md:justify-start gap-6 text-2xl">
+                    <a href="mailto:contato@exemplo.com" class="hover:text-blue-500 transition" title="E-mail"><i class="fas fa-envelope"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="hover:text-blue-500 transition" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="tel:+5521999999999" class="hover:text-blue-500 transition" title="WhatsApp"><i class="fas fa-phone"></i></a>
+                </div>
+                <p class="text-gray-500 mt-6 text-sm">Instituto Militar de Engenharia (IME) - RJ</p>
+            </div>
+        </div>
+        <div class="text-center text-gray-600 mt-16 text-xs uppercase tracking-widest">
+            © 2026 Desenvolvido por Leonardo e Thiago
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
         new Swiper(".mySwiper", {
             loop: true,
-            autoplay: { delay: 4000, disableOnInteraction: false },
+            autoplay: { delay: 4000 },
             pagination: { el: ".swiper-pagination", clickable: true },
         });
     </script>
