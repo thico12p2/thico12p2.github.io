@@ -3,49 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seu Nome - Engenharia, Programação & Dados</title>
+    <title>Thiago Dias - Engenharia & Programação</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc; /* Light blue-gray background */
+            background-color: #f8fafc;
             color: #333;
             line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-        }
-        .btn-primary {
-            @apply bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition duration-300;
-        }
-        .card {
-            @apply bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300;
+            scroll-behavior: smooth;
         }
         .header-bg {
             background-image: linear-gradient(to right top, #d1d5db, #e2e8f0, #f1f5f9, #f8fafc, #ffffff);
+        }
+        .card {
+            @apply bg-white p-6 rounded-xl shadow-md hover:shadow-2xl transition duration-300 transform hover:-translate-y-2;
+        }
+        /* Efeito extra na foto */
+        .profile-img {
+            transition: transform 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <header class="header-bg py-16 text-center">
+    <header class="header-bg py-20 text-center">
         <div class="container mx-auto px-4">
-            <img src="Captura de Tela 2026-01-21 às 19.59.35.png" alt="Sua Foto de Perfil" class="rounded-full w-36 h-36 mx-auto mb-6 border-4 border-white shadow-lg">
-            <h1 class="text-5xl font-bold text-gray-800 mb-4">Olá, eu sou [Thiago Dias]</h1>
-            <p class="text-xl text-gray-600 mb-8">Estudante de Engenharia | Entusiasta de Maratonas de Programação & Hackathons</p>
-            <a href="#projetos" class="btn-primary">Ver Meus Projetos</a>
+            <img src="test1.jpeg" alt="Foto de Thiago Dias" class="profile-img rounded-full w-40 h-40 mx-auto mb-6 border-4 border-white shadow-xl object-cover">
+            
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Olá, eu sou Thiago Dias</h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Estudante de Engenharia | Entusiasta de Maratonas de Programação & Hackathons
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#projetos" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Ver Projetos</a>
+                <a href="#contato" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">Contato</a>
+            </div>
         </div>
     </header>
 
     <section id="sobre" class="py-16 bg-white">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8">Sobre Mim</h2>
-            <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-4">
-                Sou um estudante de Engenharia com uma paixão por resolver problemas complexos através da programação. Minha jornada é marcada pela participação ativa em maratonas de programação e hackathons, onde busco aplicar meus conhecimentos em algoritmos, estruturas de dados e desenvolvimento de software para criar soluções inovadoras.
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 underline decoration-blue-500">Sobre Mim</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6">
+                Sou um estudante de Engenharia focado em resolver problemas complexos através da programação. Minha jornada é marcada pela participação em maratonas de programação e hackathons, onde aplico algoritmos e estruturas de dados para criar soluções reais.
             </p>
             <p class="text-lg text-gray-700 max-w-3xl mx-auto">
-                No meu tempo livre, dedico-me a aprender novas tecnologias e a aprimorar minhas habilidades em C++ e análise de dados, sempre com um olhar atento para a eficiência e otimização.
+                Atualmente, aprofundo meus conhecimentos em <strong>C++</strong>, análise de dados e engenharia, sempre buscando otimização e eficiência em cada linha de código.
             </p>
         </div>
     </section>
@@ -55,44 +66,62 @@
             <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Meus Projetos</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-                <div class="card">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Análise de Eficiência de Obras Públicas (RJ)</h3>
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-blue-600 mb-4 text-sm font-bold uppercase tracking-widest">C++ & Data Analysis</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Eficiência de Obras Públicas (RJ)</h3>
                     <p class="text-gray-700 mb-4">
-                        Um projeto desenvolvido em C++ para analisar a eficiência e os custos de obras públicas no estado do Rio de Janeiro. Inclui funcionalidades para:
+                        Análise técnica de custos e prazos de obras no Rio de Janeiro, utilizando lógica de programação para identificar gargalos.
                     </p>
-                    <ul class="list-disc list-inside text-gray-600 mb-4">
-                        <li>Visualização de obras concluídas no último ano</li>
-                        <li>Cálculo do montante total de custos</li>
-                        <li>Análise de dados para identificar gargalos e otimização.</li>
-                    </ul>
-                    <a href="https://github.com/SEU-USUARIO/nome-do-seu-repositorio-obras" target="_blank" class="text-blue-600 hover:underline font-medium">Ver no GitHub &rarr;</a>
+                    <a href="#" class="text-blue-600 hover:underline font-bold">Ver no GitHub &rarr;</a>
                 </div>
 
-                <div class="card">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Algoritmos para Maratonas</h3>
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-green-600 mb-4 text-sm font-bold uppercase tracking-widest">Algoritmos</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Maratonas de Programação</h3>
                     <p class="text-gray-700 mb-4">
-                        Coleção de implementações em C++ de algoritmos e estruturas de dados essenciais para competições de programação (DP, Grafos, Busca, etc.).
+                        Repositório com resoluções de problemas complexos envolvendo Grafos, DP e Geometria Computacional em C++.
                     </p>
-                    <a href="https://github.com/SEU-USUARIO/nome-do-seu-repositorio-algoritmos" target="_blank" class="text-blue-600 hover:underline font-medium">Ver no GitHub &rarr;</a>
+                    <a href="#" class="text-green-600 hover:underline font-bold">Ver no GitHub &rarr;</a>
                 </div>
 
-                <div class="card">
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Desenvolvimento Web com React</h3>
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-purple-600 mb-4 text-sm font-bold uppercase tracking-widest">Web & Tools</div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Landing Page Pessoal</h3>
                     <p class="text-gray-700 mb-4">
-                        Um projeto de web app utilizando React e Node.js para gerenciamento de tarefas, explorando conceitos de CRUD e APIs RESTful.
+                        Desenvolvimento deste site utilizando GitHub Pages e Tailwind CSS para apresentação profissional.
                     </p>
-                    <a href="https://github.com/SEU-USUARIO/nome-do-seu-repositorio-react" target="_blank" class="text-blue-600 hover:underline font-medium">Ver no GitHub &rarr;</a>
+                    <a href="#" class="text-purple-600 hover:underline font-bold">Código Fonte &rarr;</a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section id="habilidades" class="py-16 bg-white">
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8">Minhas Habilidades</h2>
-            <div class="flex flex-wrap justify-center gap-4">
-                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">C++</span>
-                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">Estruturas de Dados</span>
-                <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-semibold">Algoritmos</span>
-                <span class="bg-yellow-10
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Hard Skills</h2>
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold">C++</span>
+                <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold">C</span>
+                <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold">Estruturas de Dados</span>
+                <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold">Git/GitHub</span>
+                <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold">Análise de Dados</span>
+                <span class="bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold">Cálculo Diferencial</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato" class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Vamos nos conectar?</h2>
+            <div class="flex justify-center gap-8 mb-8">
+                <a href="mailto:seu-email@gmail.com" class="hover:text-blue-400 transition">Email</a>
+                <a href="https://linkedin.com/in/thiago-dias" class="hover:text-blue-400 transition">LinkedIn</a>
+                <a href="https://github.com/seu-username" class="hover:text-blue-400 transition">GitHub</a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2026 Thiago Dias. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
