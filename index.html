@@ -40,18 +40,18 @@
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .swiper { width: 100%; height: 80vh; }
-        .swiper-slide { 
-            position: relative; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .swiper-slide { position: relative; display: flex; align-items: center; justify-content: center; }
 
         .section-highlight { min-height: 70vh; display: flex; align-items: center; padding: 5rem 0; }
         .chart-frame { 
             background: white; border-radius: 24px; overflow: hidden; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.08); border: 1px solid #f0f0f0;
+            transition: transform 0.3s ease;
         }
+        .chart-frame:hover { transform: translateY(-5px); }
+
+        .team-img { transition: transform 0.5s ease; width: 100%; height: 100%; object-fit: cover; }
+        .team-box:hover .team-img { transform: scale(1.1); }
 
         #mapa-rj { height: 500px; width: 100%; border-radius: 20px; z-index: 10; border: 4px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
     </style>
@@ -89,14 +89,14 @@
 
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('fundo_rio1.png') center/cover;">
+            <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('fundo_rio1.png') center/cover;">
                 <div class="text-white text-center px-4">
                     <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight">Transparência Digital</h1>
                 </div>
             </div>
-            <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('fundo_rio2.png') center/cover;">
+            <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('fundo_rio2.png') center/cover;">
                 <div class="text-white text-center px-4">
-                    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight">Gestão de Infraestrutura</h1>
+                    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight">Gestão Estratégica</h1>
                 </div>
             </div>
         </div>
@@ -107,9 +107,63 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-12" data-aos="fade-up">
                 <h2 class="text-4xl font-black text-gray-900">Geolocalização de Obras</h2>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto italic">Visualize espacialmente a distribuição dos projetos de infraestrutura pelo estado.</p>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto italic">Distribuição espacial dos projetos de infraestrutura pelo estado.</p>
             </div>
             <div id="mapa-rj" data-aos="zoom-in"></div>
+        </div>
+    </section>
+
+    <section class="section-highlight">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <div class="w-16 h-1 bg-blue-600 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">Auditoria de Custos</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-8">Identificação automática de variações orçamentárias e aditivos contratuais.</p>
+                    <a href="analise_custos.html" class="inline-block bg-blue-700 text-white px-10 py-4 rounded-xl font-bold hover:bg-blue-800 transition">Ver Custos</a>
+                </div>
+                <div class="chart-frame p-4" data-aos="fade-left">
+                    <img src="grafico_custos.jpeg" alt="Gráfico de Custos" class="w-full h-auto rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-highlight bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="chart-frame p-4 order-2 md:order-1" data-aos="fade-right">
+                    <img src="grafico_prazos.jpeg" alt="Gráfico de Prazos" class="w-full h-auto rounded-lg">
+                </div>
+                <div class="order-1 md:order-2" data-aos="fade-left">
+                    <div class="w-16 h-1 bg-green-500 mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">Gestão de Prazos</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-8">Mapeamento do cronograma físico-financeiro para evitar custos sociais.</p>
+                    <a href="analise_prazos.html" class="inline-block bg-green-600 text-white px-10 py-4 rounded-xl font-bold hover:bg-green-700 transition">Ver Prazos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-blue-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-16 uppercase tracking-widest opacity-80">Corpo Técnico (IME)</h2>
+            <div class="flex flex-wrap justify-center gap-16 md:gap-32">
+                <div class="max-w-xs team-box" data-aos="zoom-in">
+                    <div class="w-56 h-56 rounded-full overflow-hidden mx-auto mb-8 border-4 border-blue-400/50 shadow-2xl">
+                        <img src="foto_thiago.png" class="team-img" alt="Thiago Dias">
+                    </div>
+                    <h4 class="text-2xl font-bold">Thiago Dias</h4>
+                    <p class="text-blue-300 font-medium mt-2">Desenvolvedor de software framework</p>
+                </div>
+                <div class="max-w-xs team-box" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-56 h-56 rounded-full overflow-hidden mx-auto mb-8 border-4 border-blue-400/50 shadow-2xl">
+                        <img src="foto_leonardo.png" class="team-img" alt="Leonardo">
+                    </div>
+                    <h4 class="text-2xl font-bold">Leonardo</h4>
+                    <p class="text-blue-300 font-medium mt-2">Analista de dados e automação de IA</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -117,19 +171,21 @@
         <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12">
             <div>
                 <h3 class="text-2xl font-bold mb-6 text-blue-500">BT DATA</h3>
-                <p class="text-gray-400 text-sm">Especialistas em engenharia de dados e processos pelo Instituto Militar de Engenharia (IME).</p>
+                <p class="text-gray-400 text-sm">Auditoria tecnológica e gestão de dados públicos.</p>
             </div>
             <div class="text-center">
-                <h3 class="text-xl font-bold mb-6">Links Úteis</h3>
+                <h3 class="text-xl font-bold mb-6">Acesso Rápido</h3>
                 <div class="flex flex-col gap-4 text-gray-400">
-                    <a href="dashboard.html" class="hover:text-white">Dashboard Completo</a>
+                    <a href="dashboard.html" class="hover:text-white">Dashboard Looker</a>
                     <a href="analise_custos.html" class="hover:text-white">Custos</a>
                     <a href="analise_prazos.html" class="hover:text-white">Prazos</a>
                 </div>
             </div>
-            <div class="text-center md:text-right text-3xl">
-                <a href="mailto:contato@btdata.com" class="hover:text-blue-500 mx-2"><i class="fas fa-envelope"></i></a>
-                <a href="#" class="hover:text-blue-500 mx-2"><i class="fab fa-linkedin"></i></a>
+            <div class="text-center md:text-right">
+                <div class="flex justify-center md:justify-end gap-8 text-3xl">
+                    <a href="mailto:contato@btdata.com" class="hover:text-blue-500 transition"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="hover:text-blue-500 transition"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
         </div>
         <div class="text-center text-gray-700 mt-16 pt-8 border-t border-gray-800 text-xs uppercase tracking-widest">
